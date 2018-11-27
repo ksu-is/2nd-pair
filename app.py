@@ -19,7 +19,7 @@ import sys
 sys.path.append(CURDIR)
 
 import re
-import ConfigParser
+import configparser
 import time
 import datetime
 import decimal
