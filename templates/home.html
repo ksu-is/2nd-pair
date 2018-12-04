@@ -159,9 +159,9 @@
 												</label>
 											</div>
 										</div>
-										
-										
-										
+
+
+
 										<hr class="line"/>
 										<button type="submit" class="btn btn-block btn-success mb-5">
 											Filter
@@ -185,7 +185,7 @@
 							<a href="#"><img class="card-img-top" src="{{ url_for("static", filename=product["image"]) }}" alt=""></a>
 							<div class="card-body">
 								<h6 class="card-title">
-									<a href="{{ url_for('abc') }}">${{product["price"]}}</a>
+									<a href="{{ url_for('product', product_id=product['id']) }}">${{product["price"]}}</a>
 									<hr>
 								</h6>
 

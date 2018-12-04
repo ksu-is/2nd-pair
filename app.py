@@ -1,7 +1,7 @@
 import sqlite3
 
 import click
-from flask import Flask, render_template, g, current_app, request
+from flask import Flask, render_template, g, current_app, request, abort
 from flask.cli import with_appcontext
 
 
@@ -49,8 +49,16 @@ def query_db(query, args=(), one=False):
     return (rv[0] if rv else []) if one else rv
 
 
+@app.route("/product/<product_id>", methods=["GET"])
+def product(product_id):
+    try:
+        product = query_db("SELECT * FROM product WHERE id=?", [product_id], one=True)
+    except sqlite3.OperationalError:
+        abort(500)
+    return render_template("product.html", product=product)
 
-@app.route("/")
+
+@app.route("/", methods=["GET"])
 def home():
     # Filters options.
     min_lens_d = request.args.get("min__lens_diameter", '')
@@ -111,16 +119,10 @@ def home():
 
     return render_template("home.html", data={"products": products, "filters": filters})
 
-@app.route('/g1')
-def abc():
-    query = "SELECT * FROM product WHERE name='Glasses 2'"
-    products = query_db(query)
-    return render_template('details.html',data={"products": products})
-
-
 
 app.teardown_appcontext(close_db)
 app.cli.add_command(init_db_command)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

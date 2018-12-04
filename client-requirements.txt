@@ -1,0 +1,9 @@
+I was also looking at this one but it seemed like a lot. I need something very basic where I can sell glasses and use search
+terms to find pairs that match like (+1.25) ,, does that make sense?
+
+So each product will have 5 fields.
+Brand
+Model
+Lens diameter
+Bridge width
+Side length
